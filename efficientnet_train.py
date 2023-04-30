@@ -13,7 +13,7 @@ import argparse
 
 # some parameters
 use_gpu = torch.cuda.is_available()
-print(use_gpu)
+print('Use GPU: ', use_gpu)
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -56,7 +56,7 @@ def loaddata(data_dir, batch_size, set_name, shuffle):
     return dataset_loaders, data_set_sizes
 
 
-def train_model(model_ft, criterion, optimizer, lr_scheduler, num_epochs=50):
+def train_model(model_ft, criterion, optimizer, lr_scheduler, num_epochs):
 
     train_loss = []
     since = time.time()
@@ -142,6 +142,7 @@ def test_model(model, criterion):
         inputs, labels = data
         labels = torch.squeeze(labels.type(torch.LongTensor))
         inputs, labels = Variable(inputs.cuda()), Variable(labels.cuda())
+        #inputs, labels = Variable(inputs), Variable(labels)
         outputs = model(inputs)
         _, preds = torch.max(outputs.data, 1)
         loss = criterion(outputs, labels)

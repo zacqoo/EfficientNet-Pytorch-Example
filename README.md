@@ -1,25 +1,36 @@
 # EfficientNet-Pytorch
-A demo for train your own dataset on EfficientNet
-Thanks for the >[A PyTorch implementation of EfficientNet](https://github.com/lukemelas/EfficientNet-PyTorch), I just simply demonstrate how to train your own dataset based on the EfficientNet-Pytorch.
-## Step 1：Prepare your own classification dataset
+
+PyTorch implementation of [EfficientNet](https://github.com/lukemelas/EfficientNet-PyTorch).
+
+## Step 1：Prepare dataset
 ---
 Then the data directory should looks like:   
 ```
 -dataset\
     -model\
     -train\
-        -1\
-        -2\
+        -class_1\
+        -class_2\
         ...
     -test\
-        -1\
-        -2\
+        -class_1\
+        -class_2\
         ...
 ```
 
-## Step 2: train and test 
+## Step 2: Install required Python packages
 
-```python efficientnet_sample.py```  
+`pip install -r requirements.txt`
+
+## Step 3: run train and test 
+
+```
+python efficientnet_train.py --data-dir "/full-path/to/EfficientNet-Pytorch-Example/dataset" --num-epochs 500 --batch-size 8 --img-size 1024  --class-num 4 --lr 0.005 --net-name "efficientnet-b5"
+```
+
+The final results and the best model will be saved in ```dataset/model/```.
+
+### Optional details
 
 ```--data-dir``` : (str) Path of ```/dataset``` folder. Default: ```None```
 
@@ -39,12 +50,6 @@ Then the data directory should looks like:
 
 ```--resume-epoch``` : (int) Defines starting epoch. Default: ```0```
 
-```--momentum``` : (float) Sets momentum. Default: ```0.9```
-
- Example usage: ```python ".\efficientnet_sample.py" --data-dir "D:\\ml_data\\dataset" --num-epochs 80 --batch-size 4 --img-size 896  --class-num 3 --weights-loc "D:\\ML\\efficientnet-b3-birads.pth" --lr 0.01 --net-name "efficientnet-b3" --resume-epoch 40```
- 
+```--momentum``` : (float) Sets momentum. Default: ```0.9``` 
  
 The pre-trained model is available on >[release](https://github.com/lukemelas/EfficientNet-PyTorch/releases). 
-You can download them under the folder ```eff_weights```.
-
-(3)You can get the final results and the best model on ```dataset/model/```.
